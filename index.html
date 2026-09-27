@@ -775,7 +775,7 @@ class Component extends DCLogic {
         ...p,
         url: safeUrl(p.url || '#'),
         venueStyle: isMobile
-          ? { flex: '1 1 100%', paddingLeft: 72, fontSize: 12.5, fontWeight: 600, lineHeight: 1.5, color: 'var(--accent)', textAlign: 'left' }
+          ? { flex: '1 1 100%', marginTop: 4, fontSize: 12.5, fontWeight: 600, lineHeight: 1.5, color: 'var(--accent)', textAlign: 'left' }
           : { flex: '0 1 180px', minWidth: 110, fontSize: 12.5, fontWeight: 600, lineHeight: 1.5, color: 'var(--accent)', textAlign: 'right', paddingTop: 2, textWrap: 'balance' },
         style: {
           display: 'flex', flexWrap: isMobile ? 'wrap' : 'nowrap', gap: isMobile ? '6px 16px' : 24, padding: 20, margin: '0 -20px', borderRadius: 14, textDecoration: 'none', color: 'inherit', cursor: 'pointer',
