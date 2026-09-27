@@ -1,0 +1,953 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mrinal Kanti Dey · PhD Researcher, IIT Bombay</title>
+<meta name="description" content="Mrinal Kanti Dey, PhD Research Scholar in Electrical Engineering at IIT Bombay. Home energy management systems, battery storage, demand response.">
+<link rel="icon" href="content/favicon.svg" type="image/svg+xml">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Mrinal Kanti Dey · PhD Researcher, IIT Bombay">
+<meta property="og:description" content="Home energy management systems, battery storage, and demand response research at IIT Bombay.">
+<meta property="og:image" content="content/share-preview.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <title>Mrinal Kanti Dey · PhD Researcher, IIT Bombay</title>
+  <meta name="description" content="Mrinal Kanti Dey, PhD Research Scholar in Electrical Engineering at IIT Bombay. Home energy management systems, battery storage, demand response.">
+  <link rel="icon" href="content/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Space+Grotesk:wght@400;500;600&display=swap">
+  <style>
+    html, body { margin: 0; padding: 0; }
+    * { box-sizing: border-box; }
+    a { color: inherit; }
+    a:hover { color: oklch(0.65 0.13 225); }
+    @keyframes battery-charge { 0% { transform: scaleX(0.06); } 85% { transform: scaleX(1); } 100% { transform: scaleX(1); } }
+    @keyframes sun-pulse { 0%, 100% { transform: scale(0.85); opacity: 0.7; } 50% { transform: scale(1.15); opacity: 1; } }
+    @keyframes airflow-move { to { stroke-dashoffset: -18; } }
+    @keyframes clock-tick { 0%, 20% { transform: rotate(0deg); } 45%, 65% { transform: rotate(90deg); } 90%, 100% { transform: rotate(180deg); } }
+    @keyframes draw-wave { 0% { stroke-dashoffset: 28; } 60% { stroke-dashoffset: 0; } 100% { stroke-dashoffset: 0; } }
+    @keyframes forecast-draw { 0% { stroke-dashoffset: 48; } 55%, 85% { stroke-dashoffset: 0; } 100% { stroke-dashoffset: -48; } }
+    @keyframes house-glow { 0%, 100% { opacity: 0.5; } 50% { opacity: 1; } }
+    @keyframes battery-charge-v { 0% { transform: scaleY(0.08); } 85% { transform: scaleY(1); } 100% { transform: scaleY(1); } }
+    @media print {
+      [data-noprint] { display: none !important; }
+      [data-print-plain] { box-shadow: none !important; border: none !important; padding: 0 !important; max-width: none !important; }
+      [data-print-section] { padding: 0 !important; }
+      [data-cv-details] { display: flex !important; }
+      [data-cv-grid] { display: block !important; }
+      body { background: #fff !important; }
+    }
+  </style>
+</helmet>
+
+<div style="--ink:oklch(0.19 0.012 240); --muted:oklch(0.46 0.01 240); --accent:oklch(0.65 0.13 225); --line:oklch(0.19 0.012 240 / 0.14); --line-strong:oklch(0.19 0.012 240 / 0.22); --bg:oklch(0.975 0.006 85); --paper:oklch(0.99 0.004 85); font-family:'Space Grotesk', sans-serif; color:var(--ink); background:var(--bg); min-height:100vh; position:relative;">
+
+  <header data-noprint="" style="{{ headerStyle }}">
+    <a href="#" onClick="{{ goFirst }}" style="display:flex; align-items:center; min-height:44px; margin:-10px 0; font-family:'Space Grotesk', sans-serif; font-weight:600; font-size:19px; letter-spacing:0.08em; text-transform:uppercase; color:oklch(1 0 0); text-decoration:none; cursor:pointer;">{{ site.name }}</a>
+
+    <sc-if value="{{ isMobile }}" hint-placeholder-val="{{ false }}">
+      <button onClick="{{ toggleNav }}" aria-label="Toggle navigation" style="display:flex; align-items:center; justify-content:center; width:44px; height:44px; margin:-12px -12px -12px 0; color:oklch(1 0 0); cursor:pointer; padding:0; background:none; border:none;">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><line x1="3" y1="6" x2="21" y2="6" style="{{ burgerTop }}"></line><line x1="3" y1="12" x2="21" y2="12" style="{{ burgerMid }}"></line><line x1="3" y1="18" x2="21" y2="18" style="{{ burgerBot }}"></line></svg>
+      </button>
+    </sc-if>
+
+    <ul style="{{ navListStyle }}">
+      <sc-for list="{{ navItems }}" as="n" hint-placeholder-count="6">
+        <li style="{{ n.liStyle }}">
+          <sc-if value="{{ n.isHome }}" hint-placeholder-val="{{ false }}">
+            <a href="{{ n.href }}" onClick="{{ n.go }}" aria-label="{{ n.label }}" style="display:flex; align-items:center; color:{{ n.color }}; cursor:pointer; padding-bottom:4px; margin-top:3px; border-bottom:2px solid transparent; transition:border-color 0.2s ease, color 0.2s ease;" style-hover="border-bottom:2px solid oklch(0.65 0.13 225);">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11 12 3l9 8"></path><path d="M5 10v10h14V10"></path></svg>
+            </a>
+          </sc-if>
+          <sc-if value="{{ n.isText }}" hint-placeholder-val="{{ true }}">
+            <a href="{{ n.href }}" onClick="{{ n.go }}" style="font-size:12px; font-weight:600; letter-spacing:0.08em; text-transform:uppercase; color:{{ n.color }}; text-decoration:none; cursor:pointer; padding-bottom:4px; border-bottom:2px solid transparent; transition:border-color 0.2s ease, color 0.2s ease;" style-hover="border-bottom:2px solid oklch(0.65 0.13 225);">{{ n.label }}</a>
+          </sc-if>
+        </li>
+      </sc-for>
+    </ul>
+  </header>
+
+  <sc-if value="{{ loadError }}" hint-placeholder-val="{{ false }}">
+    <div style="position:relative; z-index:1; max-width:560px; margin:0 auto; padding:120px 24px 0; font-size:14px; line-height:1.6; color:var(--muted); text-align:center;">Couldn't load site content ({{ loadError }}). The site reads its text from the content/ folder, so it must be opened through a web server or host, not by double-clicking the file.</div>
+  </sc-if>
+
+  <div style="{{ fadeStyle }}">
+    <svg data-noprint="" style="position:absolute; inset:0; width:100%; height:100%; z-index:0; pointer-events:none;" viewBox="0 0 900 700" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <polygon points="0,700 0,470 250,700" fill="oklch(0.62 0.1 255)"></polygon>
+      <polygon points="0,64 900,20 900,38 0,82" fill="oklch(0.3 0.07 260)"></polygon>
+      <line x1="620" y1="-20" x2="980" y2="720" stroke="oklch(0.65 0.13 225)" stroke-width="2"></line>
+      <polygon points="900,0 800,0 900,120" fill="oklch(0.65 0.13 225)"></polygon>
+    </svg>
+
+    <sc-if value="{{ isHome }}" hint-placeholder-val="{{ true }}">
+      <section style="position:relative; z-index:1; min-height:88vh; display:flex; align-items:center; justify-content:center; padding:96px 20px 64px;">
+        <div style="width:100%; max-width:480px; background:oklch(1 0 0); border:1px solid var(--line); border-radius:20px; box-shadow:0 12px 32px oklch(0.19 0.012 240 / 0.08); padding:56px 40px; font-family:'IBM Plex Sans', sans-serif; display:flex; flex-direction:column; align-items:center; gap:18px; text-align:center;">
+          <div role="img" aria-label="{{ home.name }}" style="{{ photoStyle }}"></div>
+          <p style="font-size:11px; font-weight:600; letter-spacing:0.12em; color:oklch(0.5 0.12 235); margin:0;">{{ home.institute }}</p>
+          <h1 style="margin:4px 0 0; font-family:'Newsreader', serif; font-weight:500; font-size:clamp(34px, 8vw, 48px); line-height:1.05; letter-spacing:-0.01em; color:oklch(0.27 0.07 260);">{{ home.name }}</h1>
+          <div style="margin-top:4px;"><span style="font-size:15px; font-weight:500; color:oklch(0.36 0.04 255);">{{ home.role }}</span></div>
+          <div style="margin:8px 0 0; max-width:400px; text-align:left; display:flex; flex-direction:column; gap:14px;">
+            <p style="margin:0; font-family:'Newsreader', serif; font-weight:600; font-size:clamp(22px, 5vw, 26px); line-height:1.25; letter-spacing:-0.01em; color:oklch(0.6 0.19 40); text-wrap:balance; text-align:center;">{{ home.tagline }}</p>
+            <p style="margin:0; font-size:14.5px; line-height:1.7; color:oklch(0.3 0.07 260); text-align:justify; hyphens:auto;">{{ home.bio }}</p>
+            <p style="margin:0; font-size:13.5px; font-style:italic; color:oklch(0.5 0.13 235);">{{ home.advisor }}</p>
+          </div>
+          <div style="display:flex; gap:22px; justify-content:center; flex-wrap:wrap; margin-top:8px;">
+            <sc-for list="{{ topics }}" as="t" hint-placeholder-count="4">
+              <div style="display:flex; flex-direction:column; align-items:center; gap:6px;">
+                <sc-if value="{{ t.svg }}" hint-placeholder-val="{{ false }}"><div aria-hidden="true" style="width:22px; height:22px; display:flex;" dangerouslySetInnerHTML="{{ t.svg }}"></div></sc-if>
+                <sc-if value="{{ t.img }}" hint-placeholder-val="{{ false }}"><div aria-hidden="true" style="{{ t.imgStyle }}"></div></sc-if>
+                <span style="font-size:10px; font-weight:500; letter-spacing:0.02em; color:var(--muted); line-height:1.3; text-align:center; white-space:nowrap;">{{ t.label }}</span>
+              </div>
+            </sc-for>
+          </div>
+          <div style="display:flex; gap:14px; flex-wrap:wrap; justify-content:center; margin-top:8px;">
+            <a href="{{ homeButtonHref }}" onClick="{{ homeButtonGo }}" style="display:flex; align-items:center; gap:6px; font-size:14px; font-weight:500; color:oklch(1 0 0); background:oklch(0.3 0.07 260); border-radius:999px; padding:12px 22px; text-decoration:none; cursor:pointer; transition:background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;" style-hover="background:var(--accent); color:oklch(1 0 0); transform:translateY(-1px); box-shadow:0 8px 18px oklch(0.19 0.012 240 / 0.18);">{{ home.button }}</a>
+          </div>
+          <div style="width:48px; height:1px; background:var(--line); margin:10px 0;"></div>
+          <div style="display:flex; gap:6px; flex-wrap:wrap; justify-content:center;">
+            <sc-for list="{{ links }}" as="l" hint-placeholder-count="4">
+              <a href="{{ l.href }}" target="{{ l.target }}" rel="noopener noreferrer" download="{{ l.download }}" aria-label="{{ l.long }}" onClick="{{ l.open }}" onMouseEnter="{{ l.onEnter }}" onMouseLeave="{{ l.onLeave }}" onTouchStart="{{ l.onTouchStart }}" onTouchEnd="{{ l.onTouchEnd }}" style="{{ l.pillStyle }}">
+                <span aria-hidden="true" style="width:18px; height:18px; flex:0 0 auto; display:flex;" dangerouslySetInnerHTML="{{ l.iconSvg }}"></span>
+                {{ l.label }}
+              </a>
+            </sc-for>
+          </div>
+        </div>
+      </section>
+    </sc-if>
+
+    <sc-if value="{{ isEducation }}" hint-placeholder-val="{{ false }}">
+      <section style="position:relative; z-index:1; padding:{{ sectionPad }};">
+        <div style="max-width:760px; margin:0 auto; background:var(--paper); border:1px solid var(--line); border-radius:20px; box-shadow:0 12px 32px oklch(0.19 0.012 240 / 0.08); padding:{{ panelPad }};">
+          <p style="font-size:12px; font-weight:700; letter-spacing:0.14em; color:var(--accent); margin:0 0 10px;">{{ education.label }}</p>
+          <h1 style="font-family:'Fraunces', serif; font-style:italic; font-weight:600; font-size:clamp(30px, 5vw, 40px); margin:0 0 14px; color:var(--ink);">{{ education.title }}</h1>
+          <div style="width:40px; height:3px; background:var(--accent); border-radius:2px; margin:0 0 32px;"></div>
+          <ol style="list-style:none; margin:0; padding:0;">
+            <sc-for list="{{ eduEntries }}" as="e" hint-placeholder-count="5">
+              <li style="position:relative; padding-left:28px; padding-bottom:{{ e.pad }}; border-left:1px solid {{ e.border }};">
+                <div style="position:absolute; left:-5px; top:4px; width:9px; height:9px; border-radius:50%; background:var(--accent);"></div>
+                <div style="font-size:16px; font-weight:600; color:var(--ink);">{{ e.degree }}</div>
+                <div style="font-size:13.5px; color:var(--muted); margin-top:2px;">{{ e.school }}</div>
+                <sc-if value="{{ e.note }}" hint-placeholder-val="{{ false }}">
+                  <div style="font-size:14px; color:var(--ink); margin-top:8px; line-height:1.6;">{{ e.note }}</div>
+                </sc-if>
+              </li>
+            </sc-for>
+          </ol>
+          <sc-if value="{{ education.teaching }}" hint-placeholder-val="{{ true }}">
+            <div style="margin-top:40px; padding-top:28px; border-top:1px solid var(--line); font-size:14px; color:var(--muted); line-height:1.7;">
+              <strong style="color:var(--ink); font-weight:600;">{{ education.teachingTitle }}</strong> {{ education.teaching }}
+            </div>
+          </sc-if>
+        </div>
+      </section>
+    </sc-if>
+
+    <sc-if value="{{ isResearch }}" hint-placeholder-val="{{ false }}">
+      <section style="position:relative; z-index:1; padding:{{ sectionPad }};">
+        <div style="max-width:1080px; margin:0 auto; background:var(--paper); border:1px solid var(--line); border-radius:20px; box-shadow:0 12px 32px oklch(0.19 0.012 240 / 0.08); padding:{{ panelPad }};">
+          <p style="font-size:12px; font-weight:700; letter-spacing:0.14em; color:var(--accent); margin:0 0 10px;">{{ research.label }}</p>
+          <h1 style="font-family:'Fraunces', serif; font-style:italic; font-weight:600; font-size:clamp(30px, 5vw, 40px); margin:0 0 14px; color:var(--ink);">{{ research.title }}</h1>
+          <div style="width:40px; height:3px; background:var(--accent); border-radius:2px; margin:0 0 18px;"></div>
+          <p style="font-family:'Fraunces', serif; font-style:italic; font-size:15.5px; line-height:1.6; color:var(--muted); margin:0 0 40px; max-width:520px;">{{ research.intro }}</p>
+          <div onScroll="{{ onStageScroll }}" style="{{ stageWrapStyle }}">
+            <sc-for list="{{ stages }}" as="stage" hint-placeholder-count="5">
+              <div onClick="{{ stage.toggle }}" onMouseEnter="{{ stage.onEnter }}" onMouseLeave="{{ stage.onLeave }}" style="display:flex; flex-direction:column; gap:10px; flex:{{ stageFlex }}; min-width:118px; scroll-snap-align:center; -webkit-tap-highlight-color:transparent; cursor:pointer; background:{{ stage.tint }}; border:1px solid var(--line); border-radius:14px; padding:14px; box-shadow:0 4px 14px oklch(0.19 0.012 240 / 0.08); transition:transform 0.2s ease, box-shadow 0.2s ease;" style-hover="transform:translateY(-3px); box-shadow:0 10px 20px oklch(0.19 0.012 240 / 0.1);">
+                <div style="height:64px; display:flex; align-items:center; justify-content:center; margin-top:8px;">
+                  <sc-if value="{{ stage.svg }}" hint-placeholder-val="{{ false }}"><div aria-hidden="true" style="height:52px; max-width:100%; display:flex; align-items:center; justify-content:center;" dangerouslySetInnerHTML="{{ stage.svg }}"></div></sc-if>
+                  <sc-if value="{{ stage.img }}" hint-placeholder-val="{{ false }}"><div aria-hidden="true" style="{{ stage.imgStyle }}"></div></sc-if>
+                </div>
+                <span style="font-family:'Fraunces', serif; font-weight:600; font-size:16px; line-height:1.2; color:var(--ink);">{{ stage.name }}</span>
+                <span style="font-size:13px; line-height:1.55; color:oklch(0.4 0.012 240);">{{ stage.caption }}</span>
+                <div style="{{ stage.detailStyle }}">
+                  <p style="margin:0; min-height:0; overflow:hidden; font-size:12.5px; line-height:1.55; color:var(--ink);">{{ stage.detail }}</p>
+                </div>
+              </div>
+              <sc-if value="{{ stage.showArrow }}" hint-placeholder-val="{{ true }}">
+                <div style="display:flex; align-items:center; justify-content:center; width:22px; flex:0 0 auto; align-self:center;">
+                  <div style="width:10px; height:1px; background:{{ stage.dotColor }};"></div>
+                  <div style="width:6px; height:6px; border-radius:50%; background:{{ stage.dotColor }}; flex:0 0 auto;"></div>
+                </div>
+              </sc-if>
+            </sc-for>
+          </div>
+          <sc-if value="{{ isMobile }}" hint-placeholder-val="{{ false }}">
+            <div style="display:flex; justify-content:center; gap:6px; margin:0 0 36px;">
+              <sc-for list="{{ stageDots }}" as="sd" hint-placeholder-count="5"><span style="{{ sd.style }}"></span></sc-for>
+            </div>
+          </sc-if>
+          <ol style="list-style:none; margin:0; padding:0;">
+            <sc-for list="{{ milestones }}" as="m" hint-placeholder-count="4">
+              <li style="position:relative; padding-left:28px; padding-bottom:36px; border-left:1px solid var(--line);">
+                <div style="position:absolute; left:-5px; top:4px; width:9px; height:9px; border-radius:50%; background:var(--accent);"></div>
+                <div onClick="{{ m.toggle }}" onMouseEnter="{{ m.onEnter }}" onMouseLeave="{{ m.onLeave }}" style="{{ m.cardStyle }}">
+                  <div>
+                    <span style="font-size:12px; font-weight:700; color:var(--accent); letter-spacing:0.06em;">{{ m.year }}</span>
+                    <div style="font-size:16px; font-weight:600; color:var(--ink); margin-top:4px;">{{ m.title }}</div>
+                    <div style="font-size:13.5px; font-style:italic; color:var(--muted); margin-top:2px;">{{ m.subtitle }}</div>
+                  </div>
+                  <div style="{{ m.detailsStyle }}">
+                    <div style="display:flex; flex-direction:column; gap:8px;">
+                      <sc-for list="{{ m.details }}" as="d" hint-placeholder-count="2">
+                        <div style="display:flex; gap:10px; align-items:flex-start;">
+                          <span style="width:6px; height:6px; border-radius:50%; background:var(--accent); flex:0 0 auto; margin-top:6px;"></span>
+                          <p style="margin:0; font-size:13.5px; line-height:1.6; color:var(--ink); flex:1 1 auto; min-width:0;">
+                            <sc-for list="{{ d }}" as="seg" hint-placeholder-count="1"><sc-if value="{{ seg.bold }}" hint-placeholder-val="{{ false }}"><strong>{{ seg.text }}</strong></sc-if><sc-if value="{{ seg.plain }}" hint-placeholder-val="{{ true }}"><span>{{ seg.text }}</span></sc-if></sc-for>
+                          </p>
+                        </div>
+                      </sc-for>
+                    </div>
+                  </div>
+                </div>
+              </li>
+            </sc-for>
+          </ol>
+        </div>
+      </section>
+    </sc-if>
+
+    <sc-if value="{{ isPublications }}" hint-placeholder-val="{{ false }}">
+      <section style="position:relative; z-index:1; padding:{{ sectionPad }};">
+        <div style="max-width:760px; margin:0 auto; background:var(--paper); border:1px solid var(--line); border-radius:20px; box-shadow:0 12px 32px oklch(0.19 0.012 240 / 0.08); padding:{{ panelPad }};">
+          <p style="font-size:12px; font-weight:700; letter-spacing:0.14em; color:var(--accent); margin:0 0 10px;">{{ publications.label }}</p>
+          <h1 style="font-family:'Fraunces', serif; font-style:italic; font-weight:600; font-size:clamp(30px, 5vw, 40px); margin:0 0 14px; color:var(--ink);">{{ publications.title }}</h1>
+          <div style="width:40px; height:3px; background:var(--accent); border-radius:2px; margin:0 0 32px;"></div>
+          <ul style="list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:6px;">
+            <sc-for list="{{ papers }}" as="p" hint-placeholder-count="4">
+              <li>
+                <a href="{{ p.url }}" target="_blank" rel="noopener noreferrer" onMouseEnter="{{ p.onEnter }}" onMouseLeave="{{ p.onLeave }}" onTouchStart="{{ p.onTouchStart }}" onTouchEnd="{{ p.onTouchEnd }}" style="{{ p.style }}">
+                  <span style="flex:0 0 56px; font-size:13px; font-weight:600; color:var(--accent); padding-top:2px;">{{ p.year }}</span>
+                  <div style="flex:1 1 auto; min-width:0;">
+                    <p style="font-size:15px; font-weight:600; color:var(--ink); margin:0 0 4px; line-height:1.5;">{{ p.title }}</p>
+                    <p style="font-size:13px; color:var(--muted); margin:0;">{{ p.authors }}</p>
+                  </div>
+                  <sc-if value="{{ p.venue }}" hint-placeholder-val="{{ true }}"><span style="{{ p.venueStyle }}">{{ p.venue }}</span></sc-if>
+                </a>
+              </li>
+            </sc-for>
+          </ul>
+        </div>
+      </section>
+    </sc-if>
+
+    <sc-if value="{{ isCv }}" hint-placeholder-val="{{ false }}">
+      <section data-print-section="" style="position:relative; z-index:1; padding:{{ sectionPad }};">
+        <div data-print-plain="" style="max-width:1080px; margin:0 auto; background:var(--paper); border:1px solid var(--line); border-radius:20px; box-shadow:0 12px 32px oklch(0.19 0.012 240 / 0.08); padding:{{ panelPad }};">
+          <div style="display:flex; flex-wrap:wrap; justify-content:space-between; align-items:flex-end; gap:24px; padding-bottom:28px; border-bottom:1px solid var(--line-strong);">
+            <div style="min-width:0; flex:1 1 380px;">
+              <p style="font-size:12px; font-weight:700; letter-spacing:0.14em; color:var(--accent); margin:0 0 10px;">{{ cv.label }}</p>
+              <h1 style="font-family:'Newsreader', serif; font-weight:500; font-size:clamp(32px, 5vw, 44px); line-height:1.05; margin:0; color:oklch(0.27 0.07 260);">{{ cv.name }}</h1>
+              <p style="margin:10px 0 0; font-size:15px; font-weight:500; color:oklch(0.36 0.04 255);">{{ cv.headline }}</p>
+              <div style="display:flex; flex-wrap:wrap; gap:6px 18px; margin-top:14px; font-size:13px;">
+                <sc-for list="{{ cvContacts }}" as="k" hint-placeholder-count="4">
+                  <a href="{{ k.url }}" target="{{ k.target }}" rel="noopener noreferrer" style="color:var(--muted); text-decoration:none; border-bottom:1px solid var(--line); padding-bottom:1px;" style-hover="color:var(--accent); border-bottom:1px solid var(--accent);">{{ k.label }}</a>
+                </sc-for>
+              </div>
+            </div>
+            <div data-noprint="" style="display:flex; gap:8px; flex-wrap:wrap;">
+              <button type="button" onClick="{{ toggleCvMode }}" style="font-family:inherit; font-size:13px; font-weight:500; color:var(--ink); background:transparent; border:1px solid var(--line-strong); border-radius:999px; padding:10px 16px; cursor:pointer; white-space:nowrap; transition:border-color 0.2s ease, color 0.2s ease;" style-hover="border-color:var(--accent); color:var(--accent);">{{ cvModeLabel }}</button>
+              <button type="button" onClick="{{ printCv }}" style="font-family:inherit; font-size:13px; font-weight:500; color:var(--ink); background:transparent; border:1px solid var(--line-strong); border-radius:999px; padding:10px 16px; cursor:pointer; transition:border-color 0.2s ease, color 0.2s ease;" style-hover="border-color:var(--accent); color:var(--accent);">Print</button>
+              <a href="{{ cv.file }}" download="" style="display:flex; align-items:center; gap:8px; font-size:13px; font-weight:500; color:oklch(1 0 0); background:oklch(0.3 0.07 260); border-radius:999px; padding:10px 18px; text-decoration:none; transition:background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;" style-hover="background:var(--accent); color:oklch(1 0 0); transform:translateY(-1px); box-shadow:0 8px 18px oklch(0.19 0.012 240 / 0.18);">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12"></path><path d="M7 10l5 5 5-5"></path><path d="M4 19h16"></path></svg>
+                Download PDF
+              </a>
+            </div>
+          </div>
+
+          <div data-cv-grid="" style="{{ cvGridStyle }}">
+            <sc-if value="{{ showCvNav }}" hint-placeholder-val="{{ true }}">
+              <nav data-noprint="" style="position:sticky; top:96px; align-self:start; display:flex; flex-direction:column; gap:2px; padding-top:32px;">
+                <sc-for list="{{ cvGroups }}" as="g" hint-placeholder-count="8">
+                  <a href="{{ g.anchor }}" onClick="{{ g.jump }}" style="{{ g.navStyle }}">{{ g.title }}</a>
+                </sc-for>
+              </nav>
+            </sc-if>
+            <div style="min-width:0;">
+              <sc-for list="{{ cvGroups }}" as="g" hint-placeholder-count="4">
+                <div id="{{ g.domId }}" style="padding-top:32px; scroll-margin-top:90px; break-inside:avoid-page;">
+                  <h2 style="font-family:'Fraunces', serif; font-style:italic; font-weight:600; font-size:22px; margin:0 0 14px; color:var(--ink); display:flex; align-items:center; gap:14px;">
+                    <span>{{ g.title }}</span>
+                    <span style="flex:1 1 auto; height:1px; background:var(--line);"></span>
+                  </h2>
+                  <div style="display:flex; flex-direction:column; gap:2px;">
+                    <sc-for list="{{ g.blocks }}" as="b" hint-placeholder-count="2">
+                      <sc-if value="{{ b.isText }}" hint-placeholder-val="{{ false }}">
+                        <p style="margin:0; font-size:14.5px; line-height:1.75; color:oklch(0.3 0.03 250); text-wrap:pretty;"><sc-for list="{{ b.segs }}" as="seg" hint-placeholder-count="1"><sc-if value="{{ seg.bold }}" hint-placeholder-val="{{ false }}"><strong>{{ seg.text }}</strong></sc-if><sc-if value="{{ seg.plain }}" hint-placeholder-val="{{ true }}"><span>{{ seg.text }}</span></sc-if></sc-for></p>
+                      </sc-if>
+                      <sc-if value="{{ b.isTags }}" hint-placeholder-val="{{ false }}">
+                        <div style="display:flex; flex-wrap:wrap; gap:8px;">
+                          <sc-for list="{{ b.tagList }}" as="tg" hint-placeholder-count="6">
+                            <span style="{{ tg.style }}">{{ tg.label }}</span>
+                          </sc-for>
+                        </div>
+                      </sc-if>
+                      <sc-if value="{{ b.isEntry }}" hint-placeholder-val="{{ true }}">
+                        <div onMouseEnter="{{ b.onEnter }}" onMouseLeave="{{ b.onLeave }}" style="{{ b.style }}">
+                          <span style="font-size:12.5px; font-weight:600; line-height:1.6; color:var(--accent); letter-spacing:0.02em;">{{ b.when }}</span>
+                          <div style="min-width:0;">
+                            <sc-if value="{{ b.what }}" hint-placeholder-val="{{ true }}"><div style="font-size:15px; font-weight:600; line-height:1.45; color:var(--ink);">{{ b.what }}</div></sc-if>
+                            <sc-if value="{{ b.where }}" hint-placeholder-val="{{ false }}"><div style="font-size:13.5px; color:var(--muted); margin-top:2px;">{{ b.where }}</div></sc-if>
+                            <sc-if value="{{ b.meta }}" hint-placeholder-val="{{ false }}"><div style="font-size:12.5px; font-weight:500; font-style:italic; color:oklch(0.5 0.13 235); margin-top:3px;">{{ b.meta }}</div></sc-if>
+                            <sc-if value="{{ b.hasText }}" hint-placeholder-val="{{ false }}">
+                              <p style="margin:6px 0 0; font-size:13.5px; line-height:1.65; color:oklch(0.3 0.03 250); text-wrap:pretty;"><sc-for list="{{ b.segs }}" as="seg" hint-placeholder-count="1"><sc-if value="{{ seg.bold }}" hint-placeholder-val="{{ false }}"><strong>{{ seg.text }}</strong></sc-if><sc-if value="{{ seg.plain }}" hint-placeholder-val="{{ true }}"><span>{{ seg.text }}</span></sc-if></sc-for></p>
+                            </sc-if>
+                            <sc-if value="{{ b.hasPoints }}" hint-placeholder-val="{{ false }}">
+                              <div data-cv-details="" style="{{ cvDetailsStyle }}">
+                                <sc-for list="{{ b.points }}" as="pt" hint-placeholder-count="2">
+                                  <div style="display:flex; gap:10px; align-items:flex-start;">
+                                    <span style="width:5px; height:5px; border-radius:50%; background:var(--accent); flex:0 0 auto; margin-top:8px;"></span>
+                                    <p style="margin:0; font-size:13.5px; line-height:1.6; color:oklch(0.3 0.03 250); flex:1 1 auto; min-width:0;"><sc-for list="{{ pt }}" as="seg" hint-placeholder-count="1"><sc-if value="{{ seg.bold }}" hint-placeholder-val="{{ false }}"><strong>{{ seg.text }}</strong></sc-if><sc-if value="{{ seg.plain }}" hint-placeholder-val="{{ true }}"><span>{{ seg.text }}</span></sc-if></sc-for></p>
+                                  </div>
+                                </sc-for>
+                              </div>
+                            </sc-if>
+                            <sc-if value="{{ b.url }}" hint-placeholder-val="{{ false }}">
+                              <a data-noprint="" href="{{ b.url }}" target="_blank" rel="noopener noreferrer" style="display:inline-flex; margin-top:6px; font-size:12.5px; font-weight:600; color:var(--accent); text-decoration:none;">{{ b.linkLabel }} ↗</a>
+                            </sc-if>
+                          </div>
+                        </div>
+                      </sc-if>
+                    </sc-for>
+                  </div>
+                </div>
+              </sc-for>
+            </div>
+          </div>
+        </div>
+      </section>
+    </sc-if>
+
+    <sc-if value="{{ isContact }}" hint-placeholder-val="{{ false }}">
+      <section style="position:relative; z-index:1; padding:{{ sectionPad }};">
+        <div style="max-width:760px; margin:0 auto; background:var(--paper); border:1px solid var(--line); border-radius:20px; box-shadow:0 12px 32px oklch(0.19 0.012 240 / 0.08); padding:{{ panelPad }};">
+          <p style="font-size:12px; font-weight:700; letter-spacing:0.14em; color:var(--accent); margin:0 0 10px;">{{ contact.label }}</p>
+          <h1 style="font-family:'Fraunces', serif; font-style:italic; font-weight:600; font-size:clamp(30px, 5vw, 40px); margin:0 0 14px; color:var(--ink);">{{ contact.title }}</h1>
+          <div style="width:40px; height:3px; background:var(--accent); border-radius:2px; margin:0 0 32px;"></div>
+          <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(240px, 1fr)); gap:56px; align-items:start;">
+            <form onSubmit="{{ submitForm }}">
+              <div style="display:flex; flex-direction:column; gap:6px; margin-bottom:20px;">
+                <label for="name" style="font-size:12.5px; font-weight:600; color:var(--muted); letter-spacing:0.02em;">Name</label>
+                <input id="name" name="name" type="text" required="" style="font-family:inherit; font-size:14px; color:var(--ink); background:var(--paper); border:1px solid var(--line-strong); border-radius:8px; padding:11px 13px;">
+              </div>
+              <div style="display:flex; flex-direction:column; gap:6px; margin-bottom:20px;">
+                <label for="email" style="font-size:12.5px; font-weight:600; color:var(--muted); letter-spacing:0.02em;">Email</label>
+                <input id="email" name="email" type="email" required="" style="font-family:inherit; font-size:14px; color:var(--ink); background:var(--paper); border:1px solid var(--line-strong); border-radius:8px; padding:11px 13px;">
+              </div>
+              <div style="display:flex; flex-direction:column; gap:6px; margin-bottom:20px;">
+                <label for="message" style="font-size:12.5px; font-weight:600; color:var(--muted); letter-spacing:0.02em;">Message</label>
+                <textarea id="message" name="message" rows="5" required="" style="font-family:inherit; font-size:14px; color:var(--ink); background:var(--paper); border:1px solid var(--line-strong); border-radius:8px; padding:11px 13px; resize:vertical;"></textarea>
+              </div>
+              <input type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute; left:-9999px; width:1px; height:1px; opacity:0;">
+              <div style="display:flex; align-items:center; gap:14px; flex-wrap:wrap;">
+                <button type="submit" disabled="{{ formBusy }}" style="font-family:inherit; font-size:13.5px; font-weight:600; color:oklch(1 0 0); background:var(--ink); border:none; border-radius:8px; padding:12px 22px; cursor:pointer;">{{ formButton }}</button>
+                <sc-if value="{{ formNote }}" hint-placeholder-val="{{ false }}">
+                  <span style="{{ formNoteStyle }}">{{ formNote }}</span>
+                </sc-if>
+              </div>
+            </form>
+            <div style="font-size:14px; line-height:2; display:flex; flex-direction:column;">
+              <sc-for list="{{ links }}" as="l" hint-placeholder-count="4">
+                <a href="{{ l.href }}" target="{{ l.target }}" rel="noopener noreferrer" download="{{ l.download }}" onClick="{{ l.open }}" onMouseEnter="{{ l.onEnter }}" onMouseLeave="{{ l.onLeave }}" onTouchStart="{{ l.onTouchStart }}" onTouchEnd="{{ l.onTouchEnd }}" style="{{ l.rowStyle }}">
+                  <span aria-hidden="true" style="width:18px; height:18px; flex:0 0 auto; display:flex;" dangerouslySetInnerHTML="{{ l.iconSvg }}"></span>
+                  {{ l.long }}
+                </a>
+              </sc-for>
+            </div>
+          </div>
+        </div>
+      </section>
+    </sc-if>
+
+    <sc-if value="{{ isGallery }}" hint-placeholder-val="{{ false }}">
+      <section style="position:relative; z-index:1; padding:{{ sectionPad }};">
+        <div style="max-width:1080px; margin:0 auto; background:var(--paper); border:1px solid var(--line); border-radius:20px; box-shadow:0 12px 32px oklch(0.19 0.012 240 / 0.08); padding:{{ panelPad }};">
+          <p style="font-size:12px; font-weight:700; letter-spacing:0.14em; color:var(--accent); margin:0 0 10px;">{{ page.label }}</p>
+          <h1 style="font-family:'Fraunces', serif; font-style:italic; font-weight:600; font-size:clamp(30px, 5vw, 40px); margin:0 0 14px; color:var(--ink);">{{ page.title }}</h1>
+          <div style="width:40px; height:3px; background:var(--accent); border-radius:2px; margin:0 0 18px;"></div>
+          <sc-if value="{{ page.intro }}" hint-placeholder-val="{{ false }}"><p style="font-family:'Fraunces', serif; font-style:italic; font-size:15.5px; line-height:1.6; color:var(--muted); margin:0 0 32px; max-width:560px;">{{ page.intro }}</p></sc-if>
+          <div style="display:grid; grid-template-columns:repeat(auto-fill, minmax(220px, 1fr)); gap:18px;">
+            <sc-for list="{{ photos }}" as="ph" hint-placeholder-count="6">
+              <button type="button" onClick="{{ ph.open }}" style="font-family:inherit; border:none; padding:0; background:none; cursor:zoom-in; text-align:left; display:flex; flex-direction:column; gap:8px; transition:transform 0.2s ease;" style-hover="transform:translateY(-3px);">
+                <div style="{{ ph.thumbStyle }}"></div>
+                <sc-if value="{{ ph.caption }}" hint-placeholder-val="{{ false }}"><span style="font-size:13px; line-height:1.5; color:var(--muted);">{{ ph.caption }}</span></sc-if>
+              </button>
+            </sc-for>
+          </div>
+        </div>
+      </section>
+    </sc-if>
+
+    <sc-if value="{{ isList }}" hint-placeholder-val="{{ false }}">
+      <section style="position:relative; z-index:1; padding:{{ sectionPad }};">
+        <div style="max-width:760px; margin:0 auto; background:var(--paper); border:1px solid var(--line); border-radius:20px; box-shadow:0 12px 32px oklch(0.19 0.012 240 / 0.08); padding:{{ panelPad }};">
+          <p style="font-size:12px; font-weight:700; letter-spacing:0.14em; color:var(--accent); margin:0 0 10px;">{{ page.label }}</p>
+          <h1 style="font-family:'Fraunces', serif; font-style:italic; font-weight:600; font-size:clamp(30px, 5vw, 40px); margin:0 0 14px; color:var(--ink);">{{ page.title }}</h1>
+          <div style="width:40px; height:3px; background:var(--accent); border-radius:2px; margin:0 0 18px;"></div>
+          <sc-if value="{{ page.intro }}" hint-placeholder-val="{{ false }}"><p style="font-family:'Fraunces', serif; font-style:italic; font-size:15.5px; line-height:1.6; color:var(--muted); margin:0 0 32px; max-width:560px;">{{ page.intro }}</p></sc-if>
+          <div style="display:flex; flex-direction:column; gap:14px;">
+            <sc-for list="{{ listItems }}" as="it" hint-placeholder-count="3">
+              <div onMouseEnter="{{ it.onEnter }}" onMouseLeave="{{ it.onLeave }}" onTouchStart="{{ it.onTouchStart }}" onTouchEnd="{{ it.onTouchEnd }}" style="{{ it.style }}">
+                <sc-if value="{{ it.date }}" hint-placeholder-val="{{ false }}"><span style="font-size:12px; font-weight:700; color:var(--accent); letter-spacing:0.06em;">{{ it.date }}</span></sc-if>
+                <div style="font-size:16px; font-weight:600; color:var(--ink); margin-top:4px;">{{ it.title }}</div>
+                <sc-if value="{{ it.subtitle }}" hint-placeholder-val="{{ false }}"><div style="font-size:13.5px; font-style:italic; color:var(--muted); margin-top:2px;">{{ it.subtitle }}</div></sc-if>
+                <sc-if value="{{ it.hasText }}" hint-placeholder-val="{{ false }}"><p style="margin:8px 0 0; font-size:14px; line-height:1.65; color:var(--ink);"><sc-for list="{{ it.segs }}" as="seg" hint-placeholder-count="1"><sc-if value="{{ seg.bold }}" hint-placeholder-val="{{ false }}"><strong>{{ seg.text }}</strong></sc-if><sc-if value="{{ seg.plain }}" hint-placeholder-val="{{ true }}"><span>{{ seg.text }}</span></sc-if></sc-for></p></sc-if>
+                <sc-if value="{{ it.hasPoints }}" hint-placeholder-val="{{ false }}">
+                  <div style="display:flex; flex-direction:column; gap:6px; margin-top:10px;">
+                    <sc-for list="{{ it.points }}" as="pt" hint-placeholder-count="1">
+                      <div style="display:flex; gap:10px; align-items:flex-start;">
+                        <span style="width:5px; height:5px; border-radius:50%; background:var(--accent); flex:0 0 auto; margin-top:8px;"></span>
+                        <p style="margin:0; font-size:13.5px; line-height:1.6; color:var(--ink); flex:1 1 auto; min-width:0;"><sc-for list="{{ pt }}" as="seg" hint-placeholder-count="1"><sc-if value="{{ seg.bold }}" hint-placeholder-val="{{ false }}"><strong>{{ seg.text }}</strong></sc-if><sc-if value="{{ seg.plain }}" hint-placeholder-val="{{ true }}"><span>{{ seg.text }}</span></sc-if></sc-for></p>
+                      </div>
+                    </sc-for>
+                  </div>
+                </sc-if>
+                <sc-if value="{{ it.url }}" hint-placeholder-val="{{ false }}"><a href="{{ it.url }}" target="_blank" rel="noopener noreferrer" style="display:inline-flex; margin-top:10px; font-size:12.5px; font-weight:600; color:var(--accent); text-decoration:none;">{{ it.linkLabel }} ↗</a></sc-if>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+      </section>
+    </sc-if>
+
+    <sc-if value="{{ isText }}" hint-placeholder-val="{{ false }}">
+      <section style="position:relative; z-index:1; padding:{{ sectionPad }};">
+        <div style="max-width:760px; margin:0 auto; background:var(--paper); border:1px solid var(--line); border-radius:20px; box-shadow:0 12px 32px oklch(0.19 0.012 240 / 0.08); padding:{{ panelPad }};">
+          <p style="font-size:12px; font-weight:700; letter-spacing:0.14em; color:var(--accent); margin:0 0 10px;">{{ page.label }}</p>
+          <h1 style="font-family:'Fraunces', serif; font-style:italic; font-weight:600; font-size:clamp(30px, 5vw, 40px); margin:0 0 14px; color:var(--ink);">{{ page.title }}</h1>
+          <div style="width:40px; height:3px; background:var(--accent); border-radius:2px; margin:0 0 18px;"></div>
+          <sc-if value="{{ page.intro }}" hint-placeholder-val="{{ false }}"><p style="font-family:'Fraunces', serif; font-style:italic; font-size:15.5px; line-height:1.6; color:var(--muted); margin:0 0 32px; max-width:560px;">{{ page.intro }}</p></sc-if>
+          <div style="display:flex; flex-direction:column; gap:28px;">
+            <sc-for list="{{ textBlocks }}" as="bk" hint-placeholder-count="2">
+              <div>
+                <sc-if value="{{ bk.heading }}" hint-placeholder-val="{{ false }}"><h2 style="font-family:'Fraunces', serif; font-weight:600; font-size:20px; margin:0 0 8px; color:var(--ink);">{{ bk.heading }}</h2></sc-if>
+                <sc-if value="{{ bk.hasText }}" hint-placeholder-val="{{ false }}"><p style="margin:0; font-size:14.5px; line-height:1.75; color:var(--ink); text-wrap:pretty;"><sc-for list="{{ bk.segs }}" as="seg" hint-placeholder-count="1"><sc-if value="{{ seg.bold }}" hint-placeholder-val="{{ false }}"><strong>{{ seg.text }}</strong></sc-if><sc-if value="{{ seg.plain }}" hint-placeholder-val="{{ true }}"><span>{{ seg.text }}</span></sc-if></sc-for></p></sc-if>
+                <sc-if value="{{ bk.hasPoints }}" hint-placeholder-val="{{ false }}">
+                  <div style="display:flex; flex-direction:column; gap:6px; margin-top:10px;">
+                    <sc-for list="{{ bk.points }}" as="pt" hint-placeholder-count="1">
+                      <div style="display:flex; gap:10px; align-items:flex-start;">
+                        <span style="width:5px; height:5px; border-radius:50%; background:var(--accent); flex:0 0 auto; margin-top:9px;"></span>
+                        <p style="margin:0; font-size:14px; line-height:1.65; color:var(--ink); flex:1 1 auto; min-width:0;"><sc-for list="{{ pt }}" as="seg" hint-placeholder-count="1"><sc-if value="{{ seg.bold }}" hint-placeholder-val="{{ false }}"><strong>{{ seg.text }}</strong></sc-if><sc-if value="{{ seg.plain }}" hint-placeholder-val="{{ true }}"><span>{{ seg.text }}</span></sc-if></sc-for></p>
+                      </div>
+                    </sc-for>
+                  </div>
+                </sc-if>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+      </section>
+    </sc-if>
+  </div>
+
+  <sc-if value="{{ lightboxOpen }}" hint-placeholder-val="{{ false }}">
+    <div data-noprint="" onClick="{{ closeLightbox }}" style="position:fixed; inset:0; z-index:10; background:oklch(0.15 0.02 260 / 0.9); display:flex; flex-direction:column; align-items:center; justify-content:center; gap:14px; padding:40px 24px; cursor:zoom-out;">
+      <div style="{{ lightboxImgStyle }}"></div>
+      <sc-if value="{{ lightboxCaption }}" hint-placeholder-val="{{ false }}"><p style="margin:0; font-size:14px; color:oklch(1 0 0 / 0.9); text-align:center; max-width:640px;">{{ lightboxCaption }}</p></sc-if>
+      <div style="display:flex; gap:12px;">
+        <button type="button" onClick="{{ prevPhoto }}" aria-label="Previous photo" style="font-family:inherit; font-size:14px; color:oklch(1 0 0); background:oklch(1 0 0 / 0.12); border:1px solid oklch(1 0 0 / 0.3); border-radius:999px; padding:8px 18px; cursor:pointer;">← Prev</button>
+        <button type="button" onClick="{{ nextPhoto }}" aria-label="Next photo" style="font-family:inherit; font-size:14px; color:oklch(1 0 0); background:oklch(1 0 0 / 0.12); border:1px solid oklch(1 0 0 / 0.3); border-radius:999px; padding:8px 18px; cursor:pointer;">Next →</button>
+      </div>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{ previewOpen }}" hint-placeholder-val="{{ false }}">
+    <div data-noprint="" onClick="{{ closePreview }}" style="position:fixed; inset:0; z-index:10; background:oklch(0.15 0.02 260 / 0.72); backdrop-filter:blur(4px); display:flex; align-items:center; justify-content:center; padding:24px 16px;">
+      <div onClick="{{ stop }}" style="width:100%; max-width:920px; height:min(92vh, 1100px); display:flex; flex-direction:column; background:var(--paper); border-radius:16px; overflow:hidden; box-shadow:0 24px 60px oklch(0.15 0.02 260 / 0.4);">
+        <div style="display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap; padding:14px 18px; border-bottom:1px solid var(--line); background:oklch(1 0 0);">
+          <span style="font-family:'Fraunces', serif; font-style:italic; font-weight:600; font-size:18px; color:var(--ink);">{{ previewTitle }}</span>
+          <div style="display:flex; align-items:center; gap:8px;">
+            <a href="{{ previewFile }}" download="" style="display:flex; align-items:center; gap:8px; font-size:13px; font-weight:500; color:oklch(1 0 0); background:oklch(0.3 0.07 260); border-radius:999px; padding:9px 16px; text-decoration:none; transition:background 0.2s ease;" style-hover="background:var(--accent); color:oklch(1 0 0);">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12"></path><path d="M7 10l5 5 5-5"></path><path d="M4 19h16"></path></svg>
+              Download PDF
+            </a>
+            <button type="button" onClick="{{ closePreview }}" aria-label="Close" style="display:flex; align-items:center; justify-content:center; width:38px; height:38px; border-radius:999px; border:1px solid var(--line-strong); background:transparent; color:var(--ink); cursor:pointer;">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"></path></svg>
+            </button>
+          </div>
+        </div>
+        <div ref="{{ previewRef }}" style="flex:1 1 auto; min-height:0; background:#f3f3f1;"></div>
+      </div>
+    </div>
+  </sc-if>
+
+  <footer data-noprint="" style="position:relative; z-index:1; margin-top:-56px; padding:18px 24px; text-align:center; font-size:12.5px; color:var(--muted); pointer-events:none;">{{ site.footer }}</footer>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;navBarOpacity&quot;:{&quot;editor&quot;:&quot;range&quot;,&quot;default&quot;:0.8,&quot;min&quot;:0,&quot;max&quot;:1,&quot;step&quot;:0.05,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;Navigation&quot;}}">
+const PATH_KEYS = ['icon', 'photo', 'file', 'image', 'preview'];
+
+// Tiny format: "key: value" lines, "## Type" starts a new item, "- text" adds a bullet.
+function parseMd(text, dir) {
+  const root = { items: [] };
+  let cur = root, inComment = false;
+  for (const raw of text.split(/\r?\n/)) {
+    const line = raw.trim();
+    if (inComment) { if (line.includes('-->')) inComment = false; continue; }
+    if (line.startsWith('<!--')) { if (!line.includes('-->')) inComment = true; continue; }
+    if (!line) continue;
+    if (line.startsWith('## ')) { cur = { type: line.slice(3).trim().toLowerCase(), points: [] }; root.items.push(cur); continue; }
+    if (line.startsWith('#')) continue;
+    if (/^[-*] /.test(line)) { (cur.points = cur.points || []).push(line.slice(2).trim()); continue; }
+    const m = line.match(/^([A-Za-z][\w-]*)\s*:\s*(.*)$/);
+    if (m) {
+      let v = m[2].trim();
+      if (PATH_KEYS.includes(m[1]) && v && !/^(https?:|mailto:|tel:|data:|\/)/.test(v)) v = dir + v;
+      cur[m[1]] = v;
+    }
+  }
+  return root;
+}
+const itemsOf = (doc, type) => ((doc && doc.items) || []).filter(i => i.type === type);
+const rich = s => String(s || '').split(/\*\*(.+?)\*\*/g).map((t, i) => ({ text: t, bold: i % 2 === 1, plain: i % 2 === 0 })).filter(x => x.text !== '');
+const safeUrl = u => { const s = String(u || '').trim(); const m = s.match(/^([a-z][a-z0-9+.-]*):/i); return !m || /^(https?|mailto|tel)$/i.test(m[1]) ? s : '#'; };
+const slug = s => String(s || '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+
+// Inline SVG text so its animations run in the page; merge sizing CSS into the icon's own style.
+function inlineSvg(text, css) {
+  if (!text) return undefined;
+  let clean = text.replace(/<\?xml[^>]*>/, '').replace(/<script[\s\S]*?<\/script>/gi, '').replace(/<foreignObject[\s\S]*?<\/foreignObject>/gi, '').replace(/\son[a-z]+\s*=\s*("[^"]*"|'[^']*'|[^\s>]+)/gi, '').replace(/(href\s*=\s*["'])\s*javascript:[^"']*/gi, '$1#');
+  const tag = clean.match(/<svg\b[^>]*>/);
+  if (tag) {
+    const t = tag[0];
+    const next = /\sstyle="/.test(t) ? t.replace(/\sstyle="/, ' style="' + css + ' ') : t.replace(/<svg\b/, '<svg style="' + css + '"');
+    clean = clean.replace(t, next);
+  }
+  return { __html: clean };
+}
+function withIcon(item, svgs, css, size) {
+  const svg = item.icon && svgs[item.icon] ? inlineSvg(svgs[item.icon], css) : undefined;
+  const img = svg ? undefined : item.icon;
+  return { ...item, svg, img, imgStyle: img ? { width: size[0], height: size[1], background: `url("${img}") center / contain no-repeat` } : undefined };
+}
+
+const TINTS = ['oklch(0.94 0.02 235)', 'oklch(0.94 0.02 155)', 'oklch(0.94 0.025 50)', 'oklch(0.94 0.02 300)', 'oklch(0.94 0.02 195)'];
+const DOTS = ['oklch(0.55 0.14 235)', 'oklch(0.58 0.12 155)', 'oklch(0.65 0.13 225)', 'oklch(0.58 0.13 300)', 'oklch(0.55 0.13 195)'];
+const PAPER_HUES = [300, 155, 235, 235, 50];
+const WHITE = 'oklch(1 0 0)';
+const SHADOW = '0 8px 18px oklch(0.19 0.012 240 / 0.18)';
+
+class Component extends DCLogic {
+  state = {
+    section: null,
+    sections: [],
+    site: null,
+    content: null,
+    svgs: {},
+    loadError: null,
+    fading: false,
+    isMobile: typeof window !== 'undefined' ? window.innerWidth <= 640 : false,
+    navOpen: false,
+    openMilestone: null, hoverMilestone: null, openStage: null,
+    hoverLink: null, hoverPaper: null, hoverEntry: null, hoverItem: null,
+    cvCompact: false, cvActive: 0,
+    lightbox: null,
+    formStatus: 'idle',
+    preview: null,
+    stageIdx: 0,
+  };
+
+  componentDidMount() {
+    this.isTouch = window.matchMedia ? window.matchMedia('(hover: none)').matches : false;
+    this.onDocTap = e => { if (this.state.navOpen && !e.target.closest('header')) this.setState({ navOpen: false }); };
+    document.addEventListener('click', this.onDocTap);
+    this.onResize = () => this.setState({ isMobile: window.innerWidth <= 640 });
+    this.onNav = () => this.fromLocation();
+    this.onScroll = () => this.trackCv();
+    this.onKey = e => {
+      if (this.state.preview && e.key === 'Escape') { this.setState({ preview: null }); return; }
+      if (this.state.lightbox == null) return;
+      if (e.key === 'Escape') this.setState({ lightbox: null });
+      if (e.key === 'ArrowRight') this.stepPhoto(1);
+      if (e.key === 'ArrowLeft') this.stepPhoto(-1);
+    };
+    window.addEventListener('resize', this.onResize);
+    window.addEventListener('popstate', this.onNav);
+    window.addEventListener('hashchange', this.onNav);
+    window.addEventListener('scroll', this.onScroll, { passive: true });
+    window.addEventListener('keydown', this.onKey);
+    this.loadContent();
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('resize', this.onResize);
+    window.removeEventListener('popstate', this.onNav);
+    window.removeEventListener('hashchange', this.onNav);
+    window.removeEventListener('scroll', this.onScroll);
+    window.removeEventListener('keydown', this.onKey);
+    document.removeEventListener('click', this.onDocTap);
+    clearTimeout(this.flashTimer);
+    if (this.fadeTimer) clearTimeout(this.fadeTimer);
+  }
+
+  hashId() { return decodeURIComponent((location.hash || '').replace(/^#\/?/, '')); }
+
+  pickFromHash(sections) {
+    const id = this.hashId();
+    return (sections.find(s => s.id === id) || sections[0] || {}).id;
+  }
+
+  fromLocation() {
+    const target = this.pickFromHash(this.state.sections);
+    if (target && target !== this.state.section) this.switchTo(target);
+  }
+
+  async loadContent() {
+    const get = async p => { const r = await fetch(p, { cache: 'no-cache' }); if (!r.ok) throw new Error(p); return r.text(); };
+    try {
+      const site = parseMd(await get('content/site.md'), 'content/');
+      const sections = itemsOf(site, 'section').map(s => ({
+        id: s.id || slug(s.label),
+        label: s.label || s.id,
+        layout: (s.layout || 'text').toLowerCase(),
+        folder: s.folder || s.id,
+        nav: String(s.nav || '').toLowerCase() !== 'no',
+      }));
+      const entries = await Promise.all(sections.map(async s => [s.id, parseMd(await get(`content/${s.folder}/content.md`), `content/${s.folder}/`)]));
+      const content = Object.fromEntries(entries);
+      const iconPaths = [...new Set(Object.values(content).flatMap(d => d.items.map(i => i.icon)).filter(p => p && /\.svg$/i.test(p)))];
+      const svgs = {};
+      await Promise.all(iconPaths.map(async p => { try { svgs[p] = await get(p); } catch (e) {} }));
+      this.setState({ site, sections, content, svgs, section: this.pickFromHash(sections), loadError: null });
+    } catch (e) {
+      this.setState({ loadError: String((e && e.message) || e) });
+    }
+  }
+
+  goTo(id) {
+    this.setState({ navOpen: false });
+    if (id === this.state.section) return;
+    const first = this.state.sections[0];
+    const url = first && id === first.id ? location.pathname + location.search : '#' + id;
+    try { history.pushState(null, '', url); } catch (e) {}
+    this.switchTo(id);
+  }
+
+  switchTo(id) {
+    this.setState({ fading: true });
+    clearTimeout(this.fadeTimer);
+    this.fadeTimer = setTimeout(() => {
+      this.setState({ section: id, fading: false, lightbox: null, cvActive: 0 });
+      window.scrollTo({ top: 0, behavior: 'instant' });
+    }, 220);
+  }
+
+  previewRef = el => {
+    if (!el) return;
+    const p = this.state.preview;
+    if (!p) return;
+    if (el.dataset.src === p.src) return;
+    el.dataset.src = p.src;
+    el.innerHTML = '';
+    const f = document.createElement('iframe');
+    f.src = p.src;
+    f.title = p.title || 'Preview';
+    f.style.cssText = 'width:100%; height:100%; border:0; display:block; background:#f3f3f1;';
+    el.appendChild(f);
+  };
+
+  // Desktop: hover in/out. Touch: brief highlight on tap so it feels the same.
+  hoverPair(key, idx) {
+    if (this.isTouch) {
+      return {
+        onEnter: undefined,
+        onLeave: undefined,
+        onTouchStart: () => { clearTimeout(this.flashTimer); this.setState({ [key]: idx }); },
+        onTouchEnd: () => { this.flashTimer = setTimeout(() => this.setState(s => (s[key] === idx ? { [key]: null } : null)), 350); },
+      };
+    }
+    return {
+      onEnter: () => this.setState({ [key]: idx }),
+      onLeave: () => this.setState(s => (s[key] === idx ? { [key]: null } : null)),
+    };
+  }
+
+  layoutOf(id) { return ((this.state.sections.find(s => s.id === id)) || {}).layout; }
+
+  trackCv() {
+    if (this.layoutOf(this.state.section) !== 'cv' || !this.cvIds) return;
+    let act = 0;
+    this.cvIds.forEach((d, i) => { const el = document.getElementById(d); if (el && el.getBoundingClientRect().top < 170) act = i; });
+    if (act !== this.state.cvActive) this.setState({ cvActive: act });
+  }
+
+  stepPhoto(dir) {
+    const n = (this.photoCount || 0);
+    if (!n) return;
+    this.setState(s => ({ lightbox: ((s.lightbox || 0) + dir + n) % n }));
+  }
+
+  async submitForm(e, endpoint) {
+    e.preventDefault();
+    const form = e.currentTarget;
+    if (!endpoint) { this.setState({ formStatus: 'unconfigured' }); return; }
+    const fd = new FormData(form);
+    if (fd.get('website')) return;
+    this.setState({ formStatus: 'sending' });
+    try {
+      await fetch(endpoint, { method: 'POST', mode: 'no-cors', body: new URLSearchParams(fd) });
+      form.reset();
+      this.setState({ formStatus: 'sent' });
+    } catch (err) {
+      this.setState({ formStatus: 'error' });
+    }
+  }
+
+  renderVals() {
+    const st = this.state;
+    const { section, sections, isMobile, navOpen, fading, svgs } = st;
+    const c = st.content || {};
+    const byLayout = l => { const s = sections.find(x => x.layout === l); return (s && c[s.id]) || {}; };
+    const cur = sections.find(s => s.id === section) || {};
+    const layout = cur.layout;
+    const page = c[section] || {};
+    const home = byLayout('home'), education = byLayout('education'), research = byLayout('research');
+    const publications = byLayout('publications'), contact = byLayout('contact'), cv = byLayout('cv');
+
+    const navItems = sections.filter(s => s.nav).map(s => ({
+      ...s,
+      liStyle: { display: 'flex', alignItems: 'center', minHeight: isMobile ? 44 : undefined },
+      isHome: s.layout === 'home',
+      isText: s.layout !== 'home',
+      href: '#' + s.id,
+      color: section === s.id ? WHITE : 'oklch(1 0 0 / 0.75)',
+      go: e => { if (e && e.preventDefault) e.preventDefault(); this.goTo(s.id); },
+    }));
+
+    const links = itemsOf(contact, 'link').map((l, i) => {
+      const href = safeUrl(l.file || l.url || '#');
+      const color = l.color || 'var(--accent)';
+      const hov = st.hoverLink === i;
+      const lift = { color: hov ? WHITE : color, background: hov ? color : 'transparent', transform: hov ? 'translateY(-2px)' : 'none', boxShadow: hov ? SHADOW : 'none', transition: 'background 0.2s ease, color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease' };
+      return {
+        ...l, href,
+        target: /^https?:/.test(href) ? '_blank' : undefined,
+        download: l.file ? true : undefined,
+        open: l.preview ? e => { if (e && e.preventDefault) e.preventDefault(); this.setState({ preview: { src: safeUrl(l.preview), file: safeUrl(l.file), title: l.previewTitle || 'Curriculum Vitae' } }); } : undefined,
+        iconSvg: l.icon && svgs[l.icon] ? inlineSvg(svgs[l.icon].replace(/#000(000)?\b/g, 'currentColor'), 'width:18px; height:18px; display:block;') : undefined,
+        pillStyle: { display: 'flex', alignItems: 'center', gap: 8, fontSize: 13, fontWeight: 500, textDecoration: 'none', padding: '8px 14px', minHeight: isMobile ? 44 : undefined, borderRadius: 999, border: '1px solid transparent', ...lift },
+        rowStyle: { display: 'flex', alignItems: 'center', gap: 10, alignSelf: 'flex-start', fontWeight: 500, textDecoration: 'none', padding: '6px 14px', margin: '2px 0 2px -14px', borderRadius: 999, lineHeight: 1.6, ...lift },
+        ...this.hoverPair('hoverLink', i),
+      };
+    });
+
+    const eduList = itemsOf(education, 'entry');
+    const eduEntries = eduList.map((e, i) => {
+      const last = i === eduList.length - 1;
+      return { ...e, pad: last ? '0' : '36px', border: last ? 'transparent' : 'var(--line)' };
+    });
+
+    const stageList = itemsOf(research, 'stage');
+    const stages = stageList.map((s, i) => ({
+      ...withIcon(s, svgs, 'height:52px; width:auto; max-width:100%; display:block;', [80, 52]),
+      showArrow: !isMobile && i < stageList.length - 1,
+      tint: TINTS[i % TINTS.length],
+      dotColor: DOTS[i % DOTS.length],
+      detailStyle: st.openStage === i
+        ? 'display:grid; grid-template-rows:1fr; opacity:1; transform:translateY(0); margin-top:2px; padding-top:8px; border-top:1px solid var(--line); transition:grid-template-rows 0.45s cubic-bezier(0.22,1,0.36,1), opacity 0.35s ease 0.1s, transform 0.45s cubic-bezier(0.22,1,0.36,1), padding-top 0.45s ease, margin-top 0.45s ease, border-color 0.3s ease;'
+        : 'display:grid; grid-template-rows:0fr; opacity:0; transform:translateY(-4px); margin-top:-10px; padding-top:0; border-top:1px solid transparent; transition:grid-template-rows 0.4s cubic-bezier(0.22,1,0.36,1), opacity 0.2s ease, transform 0.3s ease, padding-top 0.4s ease, margin-top 0.4s ease, border-color 0.2s ease;',
+      toggle: () => this.setState(x => ({ openStage: x.openStage === i ? null : i })),
+      onEnter: this.isTouch ? undefined : () => this.setState({ openStage: i }),
+      onLeave: this.isTouch ? undefined : () => this.setState(x => ({ openStage: x.openStage === i ? null : x.openStage })),
+    }));
+
+    const milestones = itemsOf(research, 'milestone').map((m, i) => ({
+      ...m,
+      details: (m.points || []).map(rich),
+      cardStyle: (this.isTouch ? 'cursor:pointer; -webkit-tap-highlight-color:transparent; ' : 'cursor:default; ') + 'border-radius:14px; padding:18px 20px; transition:border-color 0.25s ease, background 0.25s ease; border:1px solid ' + (st.hoverMilestone === i ? 'var(--accent)' : 'var(--line)') + '; background:' + (st.hoverMilestone === i ? TINTS[i % TINTS.length] : 'var(--bg)') + ';',
+      detailsStyle: st.openMilestone === i
+        ? 'max-height:400px; opacity:1; margin-top:16px; padding-top:14px; border-top:1px solid var(--line); overflow:hidden; transition:max-height 0.35s ease, opacity 0.3s ease, margin-top 0.35s ease, padding-top 0.35s ease;'
+        : 'max-height:0; opacity:0; margin-top:0; padding-top:0; border-top:1px solid transparent; overflow:hidden; transition:max-height 0.3s ease, opacity 0.2s ease, margin-top 0.3s ease, padding-top 0.3s ease;',
+      toggle: this.isTouch ? () => this.setState(s => (s.openMilestone === i ? { openMilestone: null, hoverMilestone: null } : { openMilestone: i, hoverMilestone: i })) : undefined,
+      onEnter: this.isTouch ? undefined : () => this.setState({ openMilestone: i, hoverMilestone: i }),
+      onLeave: this.isTouch ? undefined : () => this.setState(s => ({ openMilestone: s.openMilestone === i ? null : s.openMilestone, hoverMilestone: s.hoverMilestone === i ? null : s.hoverMilestone })),
+    }));
+
+    const papers = itemsOf(publications, 'paper').map((p, i) => {
+      const h = p.hue || PAPER_HUES[i % PAPER_HUES.length];
+      const hov = st.hoverPaper === i;
+      return {
+        ...p,
+        url: safeUrl(p.url || '#'),
+        venueStyle: isMobile
+          ? { flex: '1 1 100%', paddingLeft: 72, fontSize: 12.5, fontWeight: 600, lineHeight: 1.5, color: 'var(--accent)', textAlign: 'left' }
+          : { flex: '0 1 180px', minWidth: 110, fontSize: 12.5, fontWeight: 600, lineHeight: 1.5, color: 'var(--accent)', textAlign: 'right', paddingTop: 2, textWrap: 'balance' },
+        style: {
+          display: 'flex', flexWrap: isMobile ? 'wrap' : 'nowrap', gap: isMobile ? '6px 16px' : 24, padding: 20, margin: '0 -20px', borderRadius: 14, textDecoration: 'none', color: 'inherit', cursor: 'pointer',
+          border: `1px solid ${hov ? `oklch(0.57 0.13 ${h})` : 'transparent'}`,
+          background: hov ? `oklch(0.94 0.02 ${h})` : 'transparent',
+          transform: hov ? 'translateY(-4px) scale(1.02)' : 'none',
+          boxShadow: hov ? '0 18px 36px oklch(0.19 0.012 240 / 0.16)' : 'none',
+          transition: 'background 0.25s ease, border-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease',
+        },
+        ...this.hoverPair('hoverPaper', i),
+      };
+    });
+
+    // CV
+    const groups = [];
+    let g = null;
+    (cv.items || []).forEach(it => {
+      if (it.type === 'contact') return;
+      if (it.type === 'group') { g = { title: it.title || '', blocks: [] }; groups.push(g); return; }
+      if (!g) { g = { title: '', blocks: [] }; groups.push(g); }
+      g.blocks.push(it);
+    });
+    const cvGroups = groups.map((grp, gi) => {
+      const domId = 'cv-' + (slug(grp.title) || gi);
+      const active = st.cvActive === gi;
+      return {
+        title: grp.title, domId,
+        anchor: '#' + section,
+        jump: e => {
+          if (e && e.preventDefault) e.preventDefault();
+          const el = document.getElementById(domId);
+          if (el) window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - 90, behavior: 'smooth' });
+          this.setState({ cvActive: gi });
+        },
+        navStyle: {
+          fontSize: 13, fontWeight: active ? 600 : 500, lineHeight: 1.35, textDecoration: 'none', cursor: 'pointer',
+          color: active ? 'oklch(0.27 0.07 260)' : 'var(--muted)',
+          padding: '7px 12px', borderRadius: 8,
+          borderLeft: `2px solid ${active ? 'var(--accent)' : 'var(--line)'}`,
+          background: active ? 'oklch(0.94 0.02 235)' : 'transparent',
+          transition: 'background 0.2s ease, color 0.2s ease, border-color 0.2s ease',
+        },
+        blocks: grp.blocks.map((b, bi) => {
+          const key = gi + '-' + bi;
+          const hov = st.hoverEntry === key;
+          return {
+            ...b,
+            url: b.url ? safeUrl(b.url) : undefined, isText: b.type === 'text', isTags: b.type === 'tags', isEntry: b.type === 'entry',
+            segs: rich(b.text), hasText: !!b.text,
+            points: (b.points || []).map(rich), hasPoints: !!(b.points && b.points.length),
+            linkLabel: b.linkLabel || 'View',
+            tagList: String(b.tags || '').split(',').map(t => t.trim()).filter(Boolean).map((t, ti) => ({
+              label: t,
+              style: { fontSize: 12.5, fontWeight: 500, lineHeight: 1.4, color: 'var(--ink)', background: TINTS[(ti + gi) % TINTS.length], border: '1px solid var(--line)', borderRadius: 999, padding: '5px 12px' },
+            })),
+            style: {
+              display: 'grid', gridTemplateColumns: isMobile ? 'minmax(0,1fr)' : '130px minmax(0,1fr)', gap: isMobile ? 2 : 20,
+              padding: '12px 16px', margin: '0 -16px', borderRadius: 12, breakInside: 'avoid',
+              background: hov ? TINTS[gi % TINTS.length] : 'transparent',
+              transition: 'background 0.2s ease',
+            },
+            onEnter: () => this.setState({ hoverEntry: key }),
+            onLeave: () => this.setState(s => ({ hoverEntry: s.hoverEntry === key ? null : s.hoverEntry })),
+          };
+        }),
+      };
+    });
+    this.cvIds = cvGroups.map(x => x.domId);
+
+    // Generic layouts
+    const photoList = itemsOf(page, 'photo').filter(p => p.image);
+    this.photoCount = photoList.length;
+    const photos = photoList.map((p, i) => ({
+      ...p,
+      thumbStyle: { width: '100%', aspectRatio: '4 / 3', borderRadius: 12, border: '1px solid var(--line)', background: `oklch(0.94 0.01 240) url("${p.image}") center / cover no-repeat` },
+      open: () => this.setState({ lightbox: i }),
+    }));
+    const lb = st.lightbox != null ? photoList[st.lightbox] : null;
+
+    const listItems = itemsOf(page, 'item').map((it, i) => {
+      const hov = st.hoverItem === i;
+      return {
+        ...it,
+        segs: rich(it.text), hasText: !!it.text,
+        points: (it.points || []).map(rich), hasPoints: !!(it.points && it.points.length),
+        url: it.url ? safeUrl(it.url) : undefined, linkLabel: it.linkLabel || 'Read more',
+        style: { borderRadius: 14, padding: '18px 20px', border: `1px solid ${hov ? 'var(--accent)' : 'var(--line)'}`, background: hov ? TINTS[i % TINTS.length] : 'var(--bg)', transition: 'border-color 0.25s ease, background 0.25s ease' },
+        ...this.hoverPair('hoverItem', i),
+      };
+    });
+    const textBlocks = itemsOf(page, 'block').map(b => ({ ...b, segs: rich(b.text), hasText: !!b.text, points: (b.points || []).map(rich), hasPoints: !!(b.points && b.points.length) }));
+
+    // Contact form
+    const fs = st.formStatus;
+    const email = contact.email || '';
+    const formNotes = {
+      sending: '',
+      sent: 'Thanks, your message was received.',
+      error: 'Something went wrong. Please email ' + email + ' instead.',
+      unconfigured: 'The form isn\u2019t connected yet. Please email ' + email + '.',
+    };
+
+    const navListStyle = isMobile
+      ? { display: 'flex', position: 'absolute', top: '100%', left: 0, right: 0, flexDirection: 'column', gap: '6px', listStyle: 'none', margin: 0, background: 'oklch(0.3 0.07 260 / 0.96)', backdropFilter: 'blur(6px)', padding: '12px 32px 20px', zIndex: 3, opacity: navOpen ? 1 : 0, transform: navOpen ? 'translateY(0)' : 'translateY(-8px)', pointerEvents: navOpen ? 'auto' : 'none', visibility: navOpen ? 'visible' : 'hidden', transition: 'opacity 0.22s ease, transform 0.25s cubic-bezier(0.22,1,0.36,1), visibility 0s linear ' + (navOpen ? '0s' : '0.25s') }
+      : { display: 'flex', alignItems: 'center', gap: '32px', listStyle: 'none', margin: 0, padding: 0 };
+
+    const homeTarget = home.buttonLink || 'research';
+    const firstId = (sections[0] || {}).id;
+
+    return {
+      site: (st.site) || {},
+      home, education, research, publications, contact, cv, page,
+      photoStyle: { width: 120, height: 120, borderRadius: '50%', marginBottom: 4, flex: '0 0 auto', boxShadow: '0 0 0 4px oklch(1 0 0), 0 0 0 5px var(--line)', background: home.photo ? `oklch(0.94 0.01 240) url("${home.photo}") center / cover no-repeat` : 'transparent' },
+      topics: itemsOf(home, 'topic').map(t => withIcon(t, svgs, 'width:22px; height:22px; display:block;', [22, 22])),
+      homeButtonHref: '#' + homeTarget,
+      homeButtonGo: e => { if (e && e.preventDefault) e.preventDefault(); this.goTo(homeTarget); },
+      goFirst: e => { if (e && e.preventDefault) e.preventDefault(); if (firstId) this.goTo(firstId); },
+      links, eduEntries, stages, milestones, papers,
+      cvGroups,
+      cvContacts: itemsOf(cv, 'contact').map(k => ({ ...k, url: safeUrl(k.url), target: /^https?:/.test(k.url || '') ? '_blank' : undefined })),
+      showCvNav: !isMobile,
+      cvGridStyle: { display: 'grid', gridTemplateColumns: isMobile ? 'minmax(0,1fr)' : '190px minmax(0,1fr)', gap: isMobile ? 0 : 40, alignItems: 'start' },
+      cvDetailsStyle: st.cvCompact ? { display: 'none' } : { display: 'flex', flexDirection: 'column', gap: 6, marginTop: 8 },
+      cvModeLabel: st.cvCompact ? 'Show details' : 'Compact view',
+      toggleCvMode: () => this.setState(s => ({ cvCompact: !s.cvCompact })),
+      printCv: () => window.print(),
+      photos, listItems, textBlocks,
+      lightboxOpen: !!lb,
+      lightboxCaption: lb ? lb.caption : '',
+      lightboxImgStyle: lb ? { width: 'min(92vw, 1100px)', height: '72vh', background: `url("${lb.image}") center / contain no-repeat`, cursor: 'default' } : {},
+      closeLightbox: () => this.setState({ lightbox: null }),
+      prevPhoto: e => { e.stopPropagation(); this.stepPhoto(-1); },
+      nextPhoto: e => { e.stopPropagation(); this.stepPhoto(1); },
+      submitForm: e => this.submitForm(e, contact.formEndpoint),
+      formBusy: fs === 'sending',
+      formButton: fs === 'sending' ? 'Sending…' : 'Send message',
+      formNote: formNotes[fs] || '',
+      formNoteStyle: { fontSize: 13, lineHeight: 1.5, color: fs === 'sent' ? 'oklch(0.5 0.13 155)' : 'oklch(0.52 0.15 25)' },
+      previewOpen: !!st.preview,
+      previewTitle: st.preview ? st.preview.title : '',
+      previewFile: st.preview ? st.preview.file : '',
+      previewRef: this.previewRef,
+      closePreview: () => this.setState({ preview: null }),
+      stop: e => e.stopPropagation(),
+      loadError: st.loadError,
+      isMobile, navListStyle, navItems,
+      stageFlex: isMobile ? '0 0 76%' : '1 1 0',
+      stageWrapStyle: isMobile
+        ? { display: 'flex', gap: 12, alignItems: 'flex-start', overflowX: 'auto', scrollSnapType: 'x mandatory', WebkitOverflowScrolling: 'touch', scrollbarWidth: 'none', padding: '8px 20px 20px', margin: '0 -20px 20px', scrollPaddingInline: 20 }
+        : { display: 'flex', flexWrap: 'wrap', rowGap: 16, alignItems: 'flex-start', padding: '8px 0 20px', marginBottom: 44 },
+      stageDots: stageList.map((_, i) => ({ style: { width: st.stageIdx === i ? 18 : 6, height: 6, borderRadius: 3, background: st.stageIdx === i ? 'var(--accent)' : 'var(--line-strong)', transition: 'width 0.25s ease, background 0.25s ease' } })),
+      onStageScroll: e => { const el = e.currentTarget; const first = el.firstElementChild; if (!first) return; const w = first.getBoundingClientRect().width + 12; const i = Math.round(el.scrollLeft / w); if (i !== st.stageIdx) this.setState({ stageIdx: i }); },
+      panelPad: isMobile ? '32px 20px' : '48px 40px',
+      sectionPad: isMobile ? '88px 12px 72px' : '96px 24px',
+      toggleNav: () => this.setState(s => ({ navOpen: !s.navOpen })),
+      burgerTop: { transformOrigin: '12px 12px', transition: 'transform 0.25s ease', transform: navOpen ? 'translateY(6px) rotate(45deg)' : 'none' },
+      burgerMid: { transition: 'opacity 0.2s ease', opacity: navOpen ? 0 : 1 },
+      burgerBot: { transformOrigin: '12px 12px', transition: 'transform 0.25s ease', transform: navOpen ? 'translateY(-6px) rotate(-45deg)' : 'none' },
+      isHome: layout === 'home', isEducation: layout === 'education', isResearch: layout === 'research',
+      isPublications: layout === 'publications', isContact: layout === 'contact', isCv: layout === 'cv',
+      isGallery: layout === 'gallery', isList: layout === 'list', isText: layout === 'text',
+      fadeStyle: { position: 'relative', opacity: fading || !st.content ? 0 : 1, transition: 'opacity 0.22s ease' },
+      headerStyle: {
+        position: 'fixed', top: 0, left: 0, right: 0, zIndex: 5,
+        display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+        padding: '20px 32px',
+        background: `oklch(0.3 0.07 260 / ${this.props.navBarOpacity ?? 0.8})`,
+        backdropFilter: 'blur(6px)',
+      },
+    };
+  }
+}
+</script>
+</body>
+</html>

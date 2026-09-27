@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <title>CV · Mrinal Kanti Dey</title>
+  <base target="_blank">
+  <script src="./doc-page.js"></script>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap">
+  <style>
+    html, body { margin: 0; padding: 0; }
+    * { box-sizing: border-box; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    a { color: inherit; }
+    a:hover { color: oklch(0.5 0.12 225); }
+    doc-page:not(:defined) { visibility: hidden; }
+    @media print { doc-page { padding: 0 !important; } }
+  </style>
+</helmet>
+
+<doc-page size="a4" margin="0.6in">
+  <div style="font-family:'IBM Plex Sans', sans-serif; font-size:9.8pt; line-height:1.5; color:oklch(0.24 0.03 255);">
+
+    <header style="display:flex; flex-wrap:wrap; justify-content:space-between; gap:10px 24px; align-items:flex-end; padding-bottom:12pt; border-bottom:2pt solid oklch(0.3 0.07 260);">
+      <div style="flex:1 1 300px; min-width:0;">
+        <h1 style="margin:0; font-family:'Newsreader', serif; font-weight:500; font-size:28pt; line-height:1; letter-spacing:-0.01em; color:oklch(0.27 0.07 260);">{{ cv.name }}</h1>
+        <p style="margin:6pt 0 0; font-size:10.5pt; font-weight:500; color:oklch(0.4 0.05 250);">{{ cv.headline }}</p>
+      </div>
+      <div style="display:flex; flex-direction:column; align-items:flex-end; gap:1pt; font-size:8.8pt; text-align:right;">
+        <sc-for list="{{ contacts }}" as="k" hint-placeholder-count="4">
+          <a href="{{ k.url }}" target="_blank" rel="noopener noreferrer" style="color:oklch(0.4 0.05 250); text-decoration:none; white-space:nowrap;">{{ k.label }}</a>
+        </sc-for>
+      </div>
+    </header>
+
+    <sc-for list="{{ groups }}" as="g" hint-placeholder-count="6">
+      <section style="margin-top:14pt;">
+        <h2 style="margin:0 0 7pt; display:flex; align-items:center; gap:8pt; font-size:8.6pt; font-weight:600; letter-spacing:0.16em; text-transform:uppercase; color:oklch(0.5 0.12 225); break-after:avoid;">
+          <span style="width:6pt; height:6pt; background:oklch(0.5 0.12 225); flex:0 0 auto;"></span>
+          <span>{{ g.title }}</span>
+          <span style="flex:1 1 auto; height:0.6pt; background:oklch(0.3 0.07 260 / 0.25);"></span>
+        </h2>
+        <div style="display:flex; flex-direction:column; gap:7pt;">
+          <sc-for list="{{ g.blocks }}" as="b" hint-placeholder-count="2">
+            <sc-if value="{{ b.isText }}" hint-placeholder-val="{{ false }}">
+              <p style="margin:0; text-align:justify; hyphens:auto;"><sc-for list="{{ b.segs }}" as="s" hint-placeholder-count="1"><sc-if value="{{ s.bold }}" hint-placeholder-val="{{ false }}"><strong>{{ s.text }}</strong></sc-if><sc-if value="{{ s.plain }}" hint-placeholder-val="{{ true }}"><span>{{ s.text }}</span></sc-if></sc-for></p>
+            </sc-if>
+            <sc-if value="{{ b.isTags }}" hint-placeholder-val="{{ false }}">
+              <div style="display:flex; flex-wrap:wrap; gap:4pt 5pt;">
+                <sc-for list="{{ b.tags }}" as="t" hint-placeholder-count="6">
+                  <span style="{{ t.style }}">{{ t.label }}</span>
+                </sc-for>
+              </div>
+            </sc-if>
+            <sc-if value="{{ b.isEntry }}" hint-placeholder-val="{{ true }}">
+              <div style="display:flex; flex-wrap:wrap; gap:2pt 12pt; break-inside:avoid;">
+                <span style="flex:0 0 78pt; font-size:8.8pt; font-weight:600; line-height:1.55; color:oklch(0.5 0.12 225);">{{ b.when }}</span>
+                <div style="flex:1 1 240px; min-width:0; padding-left:10pt; border-left:0.8pt solid {{ b.rule }};">
+                  <sc-if value="{{ b.what }}" hint-placeholder-val="{{ true }}">
+                    <div style="display:flex; justify-content:space-between; align-items:baseline; gap:10pt;">
+                      <span style="flex:1 1 auto; min-width:0; font-size:10.3pt; font-weight:600; color:oklch(0.22 0.04 255);">{{ b.what }}</span>
+                      <sc-if value="{{ b.meta }}" hint-placeholder-val="{{ false }}"><span style="flex:0 0 auto; white-space:nowrap; font-size:8.6pt; font-weight:500; color:oklch(0.3 0.07 260); background:oklch(0.94 0.02 235); border-radius:3pt; padding:0.5pt 5pt;">{{ b.meta }}</span></sc-if>
+                    </div>
+                  </sc-if>
+                  <sc-if value="{{ b.where }}" hint-placeholder-val="{{ false }}"><div style="font-style:italic; color:oklch(0.42 0.03 250);">{{ b.where }}</div></sc-if>
+                  <sc-if value="{{ b.hasText }}" hint-placeholder-val="{{ false }}">
+                    <p style="margin:2pt 0 0;"><sc-if value="{{ b.num }}" hint-placeholder-val="{{ false }}"><span style="font-weight:600; color:oklch(0.5 0.12 225);">[{{ b.num }}] </span></sc-if><sc-for list="{{ b.segs }}" as="s" hint-placeholder-count="1"><sc-if value="{{ s.bold }}" hint-placeholder-val="{{ false }}"><strong>{{ s.text }}</strong></sc-if><sc-if value="{{ s.plain }}" hint-placeholder-val="{{ true }}"><span>{{ s.text }}</span></sc-if></sc-for><sc-if value="{{ b.url }}" hint-placeholder-val="{{ false }}"> <a href="{{ b.url }}" target="_blank" rel="noopener noreferrer" style="font-size:8.6pt; font-weight:600; color:oklch(0.5 0.12 225); text-decoration:none; white-space:nowrap;">{{ b.linkLabel }} ↗</a></sc-if></p>
+                  </sc-if>
+                  <sc-if value="{{ b.hasPoints }}" hint-placeholder-val="{{ false }}">
+                    <ul style="margin:3pt 0 0; padding:0; list-style:none; display:flex; flex-direction:column; gap:2pt;">
+                      <sc-for list="{{ b.points }}" as="pt" hint-placeholder-count="2">
+                        <li style="display:flex; gap:7pt;"><span style="width:3.5pt; height:3.5pt; border-radius:50%; background:oklch(0.5 0.12 225); flex:0 0 auto; margin-top:5.5pt;"></span><span style="min-width:0;"><sc-for list="{{ pt }}" as="s" hint-placeholder-count="1"><sc-if value="{{ s.bold }}" hint-placeholder-val="{{ false }}"><strong>{{ s.text }}</strong></sc-if><sc-if value="{{ s.plain }}" hint-placeholder-val="{{ true }}"><span>{{ s.text }}</span></sc-if></sc-for></span></li>
+                      </sc-for>
+                    </ul>
+                  </sc-if>
+                </div>
+              </div>
+            </sc-if>
+          </sc-for>
+        </div>
+      </section>
+    </sc-for>
+
+    <sc-if value="{{ error }}" hint-placeholder-val="{{ false }}">
+      <p style="color:oklch(0.52 0.15 25);">Couldn't load content/cv/content.md ({{ error }}). Open this page through a web server.</p>
+    </sc-if>
+  </div>
+</doc-page>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+function parseMd(text) {
+  const root = { items: [] };
+  let cur = root, inComment = false;
+  for (const raw of text.split(/\r?\n/)) {
+    const line = raw.trim();
+    if (inComment) { if (line.includes('-->')) inComment = false; continue; }
+    if (line.startsWith('<!--')) { if (!line.includes('-->')) inComment = true; continue; }
+    if (!line) continue;
+    if (line.startsWith('## ')) { cur = { type: line.slice(3).trim().toLowerCase(), points: [] }; root.items.push(cur); continue; }
+    if (line.startsWith('#')) continue;
+    if (/^[-*] /.test(line)) { cur.points.push(line.slice(2).trim()); continue; }
+    const m = line.match(/^([A-Za-z][\w-]*)\s*:\s*(.*)$/);
+    if (m) cur[m[1]] = m[2].trim();
+  }
+  return root;
+}
+const safeUrl = u => { const s = String(u || '').trim(); const m = s.match(/^([a-z][a-z0-9+.-]*):/i); return !m || /^(https?|mailto|tel)$/i.test(m[1]) ? s : '#'; };
+const rich = s => String(s || '').split(/\*\*(.+?)\*\*/g).map((t, i) => ({ text: t, bold: i % 2 === 1, plain: i % 2 === 0 })).filter(x => x.text !== '');
+const TINTS = ['oklch(0.95 0.02 235)', 'oklch(0.95 0.02 155)', 'oklch(0.95 0.025 50)', 'oklch(0.95 0.02 300)', 'oklch(0.95 0.02 195)'];
+
+class Component extends DCLogic {
+  state = { doc: null, error: null };
+
+  // Narrow screens: shrink the sheet to the screen so the CV reflows (print restores A4).
+  fitWidth = () => {
+    const el = document.querySelector('doc-page');
+    if (!el) return;
+    const vw = document.documentElement.clientWidth;
+    if (vw < 860 && !this.printing) {
+      el.setAttribute('width', Math.max(280, vw - 24) + 'px');
+      el.setAttribute('margin', vw < 500 ? '20px' : '0.45in');
+      el.style.padding = '12px';
+      el.style.minWidth = '0';
+    } else {
+      el.removeAttribute('width');
+      el.setAttribute('margin', '0.6in');
+      el.style.padding = '';
+      el.style.minWidth = '';
+    }
+  };
+  beforePrint = () => { this.printing = true; this.fitWidth(); };
+  afterPrint = () => { this.printing = false; this.fitWidth(); };
+
+  componentWillUnmount() {
+    window.removeEventListener('resize', this.fitWidth);
+    window.removeEventListener('beforeprint', this.beforePrint);
+    window.removeEventListener('afterprint', this.afterPrint);
+  }
+
+  componentDidUpdate() { requestAnimationFrame(this.fitWidth); }
+
+  async componentDidMount() {
+    window.addEventListener('resize', this.fitWidth);
+    window.addEventListener('beforeprint', this.beforePrint);
+    window.addEventListener('afterprint', this.afterPrint);
+    requestAnimationFrame(this.fitWidth);
+    try {
+      const r = await fetch('content/cv/content.md', { cache: 'no-cache' });
+      if (!r.ok) throw new Error(r.status);
+      this.setState({ doc: parseMd(await r.text()) });
+    } catch (e) { this.setState({ error: String(e.message || e) }); }
+  }
+
+  renderVals() {
+    const doc = this.state.doc || { items: [] };
+    const groups = [];
+    let g = null;
+    doc.items.forEach(it => {
+      if (it.type === 'contact') return;
+      if (it.type === 'group') { g = { title: it.title || '', blocks: [] }; groups.push(g); return; }
+      if (!g) { g = { title: '', blocks: [] }; groups.push(g); }
+      g.blocks.push(it);
+    });
+    return {
+      cv: doc,
+      error: this.state.error,
+      contacts: doc.items.filter(i => i.type === 'contact').map(k => ({ ...k, url: safeUrl(k.url) })),
+      groups: groups.map((grp, gi) => {
+        const isPubs = /publication/i.test(grp.title);
+        let n = 0;
+        return {
+          title: grp.title,
+          blocks: grp.blocks.map(b => ({
+            ...b,
+            isText: b.type === 'text', isTags: b.type === 'tags', isEntry: b.type === 'entry',
+            segs: rich(b.text), hasText: !!b.text,
+            points: (b.points || []).map(rich), hasPoints: !!(b.points && b.points.length),
+            num: isPubs && b.type === 'entry' ? String(++n) : '',
+            linkLabel: b.linkLabel || 'Link',
+            rule: 'oklch(0.3 0.07 260 / 0.18)',
+            tags: String(b.tags || '').split(',').map(t => t.trim()).filter(Boolean).map((t, ti) => ({
+              label: t,
+              style: { fontSize: '8.6pt', fontWeight: 500, lineHeight: 1.35, color: 'oklch(0.28 0.05 255)', background: TINTS[(ti + gi) % TINTS.length], border: '0.6pt solid oklch(0.3 0.07 260 / 0.14)', borderRadius: '10pt', padding: '1.5pt 7pt', whiteSpace: 'nowrap' },
+            })),
+          })),
+        };
+      }),
+    };
+  }
+}
+</script>
+</body>
+</html>
