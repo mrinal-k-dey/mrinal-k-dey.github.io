@@ -13,7 +13,7 @@
 label: GET IN TOUCH
 title: Contact
 email: mrinal.k.dey@iitb.ac.in
-formEndpoint:
+formEndpoint: https://script.google.com/macros/s/AKfycbzFjV3UiTbUd5zaM1Z4in3PXKRATQM9CtMIRJSXo3UXN4RLwGCSXmMZRyIbikJQR1Q/exec
 
 ## Link
 label: Email
