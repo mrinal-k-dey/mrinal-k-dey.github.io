@@ -56,24 +56,16 @@ text: Focus: Battery-aware HEMS Optimization, Energy Scheduling, Demand Response
 when: 2021 – 2023
 what: M.Tech in Power Systems
 where: National Institute of Technology, Kurukshetra
-meta: CGPA: 8.83
+meta: Advisor: Prof. Saurabh Chanana
 text: Thesis: Short-Term Forecasting for Power System Operation.
 
 ## Entry
 when: 2015 – 2019
 what: B.Tech in Electronics and Electrical Engineering
 where: Kalinga Institute of Industrial Technology, Bhubaneswar
-meta: CGPA: 7.29
 
 ## Group
 title: Research Experience
-
-## Entry
-when: PhD
-what: Battery-aware HEMS scheduling
-where: IIT Bombay
-- MILP-based HEMS scheduling integrating PV, battery, EV, and grid interaction, with multiple battery degradation formulations (quadratic, DoD-based linear, net-load-factor-based dynamic).
-- Multiobjective optimization balancing energy cost and battery degradation using weighted-sum and AUGMECON epsilon-constraint methods, including Pareto front and knee-point analysis.
 
 ## Entry
 when: PhD
@@ -81,6 +73,13 @@ what: Residential AC demand flexibility
 where: IIT Bombay
 - Experimental and simulation-based assessment of residential AC demand flexibility using inverter and non-inverter systems under Mumbai’s tropical humid climate.
 - Developing a hybrid data-driven and physics-based inverter AC model, combining data-driven parameter identification with an equivalent thermal parameter (ETP) framework.
+
+## Entry
+when: PhD
+what: Battery-aware HEMS scheduling
+where: IIT Bombay
+- MILP-based HEMS scheduling integrating PV, battery, EV, and grid interaction, with multiple battery degradation formulations (quadratic, DoD-based linear, net-load-factor-based dynamic).
+- Multiobjective optimization balancing energy cost and battery degradation using weighted-sum and AUGMECON epsilon-constraint methods, including Pareto front and knee-point analysis.
 
 ## Entry
 when: Aug – Dec 2023
@@ -157,6 +156,11 @@ where: IIT Bombay
 when: Past
 what: Teaching Assistant, Power Engineering II
 where: IIT Bombay
+
+## Entry
+when: 2022 – 2023
+what: Teaching Assistant, Simulations Lab
+where: M.Tech, NIT Kurukshetra
 
 ## Group
 title: Technical Skills
